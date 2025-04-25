@@ -1,0 +1,203 @@
+﻿<Window x:Class="VetClinic.window.WindowAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VetClinic.window"
+        mc:Ignorable="d"
+        Title="WindowAppointment" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Управление записями на прием" 
+                   FontSize="24" 
+                   FontWeight="Bold"
+                   Foreground="#FFE65100"
+                   Margin="0,0,0,20"
+                   Grid.Row="0"/>
+
+        <!-- Панель фильтров -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="8"
+                Padding="15"
+                BorderBrush="#FFE65100"
+                BorderThickness="1"
+                Margin="0,0,0,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <DatePicker x:Name="dpFilterDate" Width="163" VerticalAlignment="Center" Height="45"/>
+                    <Button x:Name="FilterButton" Content="Фильтровать" Margin="10,0,0,0" Width="100" Click="FilterButton_Click"/>
+                </StackPanel>
+
+                <Button Content="Сбросить фильтр" 
+                        Click="ClearFilterButton_Click" 
+                        Grid.Column="2"
+                        Margin="20,0,0,0"
+                        Width="120"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Right">
+                    <TextBox x:Name="txtSearch" Width="191" VerticalAlignment="Center" Height="53"/>
+                    <Button Content="Поиск" Click="Search_Click" Margin="10,0,0,0" Width="80"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Таблица записей -->
+        <Border Grid.Row="2" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#FFE65100"
+                BorderThickness="1"
+                Padding="5">
+            <DataGrid x:Name="dgAppointments" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding DateAccep, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
+                    <DataGridTextColumn Header="Животное" Binding="{Binding Animal.Name}" Width="200"/>
+                    <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Панель кнопок -->
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,0,0">
+            <Button Content="Редактировать" 
+                    Click="EditAppointment_Click" 
+                    Width="156"
+                    Height="35"/>
+            <Button Content="Добавить" 
+                    x:Name="AddAppointment" 
+                    Click="AddAppointment_Click" 
+                    Width="147"
+                    Height="35"
+                    Margin="15,0,0,0"/>
+            <Button Content="Удалить" 
+                    Click="DeleteAppointment_Click" 
+                    Width="143"
+                    Height="35"
+                    Margin="15,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+    <!--<Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        --><!-- Заголовок --><!--
+        <TextBlock Text="Управление записями на прием" 
+                   FontSize="24" 
+                   FontWeight="Bold"
+                   Foreground="#FFE65100"
+                   Margin="0,0,0,20"
+                   Grid.Row="0"/>
+
+        --><!-- Панель фильтров --><!--
+        <Border Grid.Row="1" 
+                Background="White" 
+                CornerRadius="8"
+                Padding="15"
+                BorderBrush="#FFE65100"
+                BorderThickness="1"
+                Margin="0,0,0,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <DatePicker x:Name="dpFilterDate" Width="163" VerticalAlignment="Center" Height="45"/>
+                    <Button x:Name="FilterButton" Content="Фильтровать" Margin="10,0,0,0" Width="100"/>
+                </StackPanel>
+
+                <Button Content="Сбросить фильтр" 
+                        Click="ClearFilterButton_Click" 
+                        Grid.Column="2"
+                        Margin="20,0,0,0"
+                        Width="120"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="4" HorizontalAlignment="Right">
+                    <TextBox x:Name="txtSearch" Width="191" VerticalAlignment="Center" Height="53"/>
+                    <Button Content="Поиск" Click="Search_Click" Margin="10,0,0,0" Width="80"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        --><!-- Таблица записей --><!--
+        <Border Grid.Row="2" 
+                Background="White"
+                CornerRadius="8"
+                BorderBrush="#FFE65100"
+                BorderThickness="1"
+                Padding="5">
+            <DataGrid x:Name="dgAppointments" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding DateAccep, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
+                    <DataGridTextColumn Header="Животное" Binding="{Binding Animal.Name}" Width="200"/>
+                    <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        --><!-- Панель кнопок --><!--
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,0,0">
+
+            <Button Content="Редактировать" 
+                    Click="EditAppointment_Click" 
+                    Width="156"
+                    Height="35"/>
+
+            <Button Content="Добавить" 
+                    x:Name="AddAppointment" 
+                    Click="AddAppointment_Click" 
+                    Width="147"
+                    Height="35"
+                    Margin="15,0,0,0"/>
+
+            <Button Content="Удалить" 
+                    Click="DeleteAppointment_Click" 
+                    Width="130"
+                    Height="35"
+                    Margin="15,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>-->
+
+
+
+
